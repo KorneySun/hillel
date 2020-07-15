@@ -1,0 +1,12 @@
+{
+    "name": "dima/hillel",
+    "type": "project",
+    "license": "bsd",
+    "authors": [
+        {
+            "name": "Dima",
+            "email": "euromix@bigmir.net"
+        }
+    ],
+    "require": {}
+}
