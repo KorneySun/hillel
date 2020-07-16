@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Figure;
+namespace Lesson_5_composer\Классы\Figure;
 
 
 class Square extends Figure{

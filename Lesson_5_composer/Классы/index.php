@@ -6,7 +6,13 @@
 //require_once __DIR__.'/Figure/Figure.php';
 //require_once __DIR__.'/Car/Car.php';
 
-require_once __DIR__.'/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+
+use Lesson_5_composer\Классы\Figure\Circle;
+use Lesson_5_composer\Классы\Figure\Square;
+use Lesson_5_composer\Классы\Figure\Triangle;
+
+//require_once __DIR__.'/autoload.php';
 
 //=================================================================================================
 //ИСПОЛЬЗУЕМ:
@@ -14,7 +20,7 @@ require_once __DIR__.'/autoload.php';
 //РАБОТА С КЛАССОМ Human
 
 
-$student = new \Human\Student();
+$student = new Lesson_5_composer\Классы\Human\Student();
 
 $student->gender = 'male';
 $student->setName('Dmitriy Korneenko');
@@ -46,9 +52,9 @@ echo '==========================================================================
 //ВЫЧИСЛЯЕМ ПЛОЩАДЬ ФИГУР
 //РАБОТА С КЛАССОМ Figure
 
-$circle = new \Figure\Circle(30);
-$square = new \Figure\Square(20);
-$triangle = new \Figure\Triangle(15, 40);
+$circle = new Circle(30);
+$square = new Square(20);
+$triangle = new Triangle(15, 40);
 
 //ПОСЧИТАЕМ ПЛОЩАДЬ КАЖДОЙ ФИГУРЫ
 echo 'Площадь круга составила - '.$circle->calculate_Square().'<br>';
@@ -64,7 +70,7 @@ echo '==========================================================================
 //ИСПОЛЬЗУЕМ ИНТЕРФЕЙСЫ И ТРЕЙТ
 //РАБОТА С КЛАССОМ Car
 
-$car = new Car\Car();
+$car = new Lesson_5_composer\Классы\Car\Car();
 $car->count_Wheels();
 $car->count_Doors();
 $car->change_Oil();
