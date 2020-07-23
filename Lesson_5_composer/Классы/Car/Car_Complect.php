@@ -1,6 +1,6 @@
 <?php
 
-namespace Car;
+namespace Lesson_5_composer\Классы\Car;
 
 
 interface Car_Complect

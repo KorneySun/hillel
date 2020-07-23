@@ -1,12 +1,19 @@
 {
     "name": "dima/hillel",
-    "type": "project",
-    "license": "bsd",
+    "type": "library",
+    "license": "BSD",
     "authors": [
         {
             "name": "Dima",
             "email": "euromix@bigmir.net"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/var-dumper": "^5.1"
+    },
+    "autoload": {
+        "psr-4":{
+          "Lesson_5_composer\\Классы\\": "Lesson_5_composer/Классы/"
+        }
+    }
 }
