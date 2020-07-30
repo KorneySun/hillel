@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +16,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'IndexController')->name('index');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::group([
+    'as' => 'homework.',
+    'namespace' => 'Homework',
+    'prefix' => '/homework'],
+    function(Router $route){
+        $route->get('/','HomeworkController@index')->name('index');
+        $route->get('/customer','CustomerController@create')->name('customer_create');
+        $route->post('/customer','CustomerController@store')->name('customer_store');
+        $route->get('/product','ProductController@create')->name('product_create');
+        $route->post('/product','ProductController@store')->name('product_store');
+        $route->get('/service','ServiceController@create')->name('service_create');
+        $route->post('/service','ServiceController@store')->name('service_store');
+
 });
 
 
-Route::get('/home','IndexController@show')->name('home');
 
-Route::get('/laravel_home','IndexController@laravel_show')->name('laravel_home');
+
