@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCreateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -54,9 +55,24 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function products_show()
     {
-        //
+        $products = Product::all();
+        return view('site.product_list', array('products'=>$products));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function product_show($id)
+    {
+        $product = Product::where('id', $id)->first();
+//        $product = $product ->toArray();
+//        dd($product);
+        return view('site.product_one', array('product'=>$product));
     }
 
     /**

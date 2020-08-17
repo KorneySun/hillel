@@ -29,6 +29,12 @@ Route::group([
         $route->get('/','HomeworkController@index')->name('index');
         $route->get('/customer','CustomerController@create')->name('customer_create');
         $route->post('/customer','CustomerController@store')->name('customer_store');
+
+        $route->get('/products_show','ProductController@products_show')->name('products_show');
+        $route->get('/product_show/{id}','ProductController@product_show')->name('product_show');
+        $route->get('/categories_show','CategoryController@categories_show')->name('categories_show');
+
+
         $route->get('/product','ProductController@create')->name('product_create');
         $route->post('/product','ProductController@store')->name('product_store');
         $route->get('/service','ServiceController@create')->name('service_create');

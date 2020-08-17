@@ -17,20 +17,41 @@
         <div class="container">
             <ul class="nav col justify-content-between">
                 <li class="nav-item">
-                    <a class="nav-link active h1" href="{{ route('homework.customer_create') }}">Пользователи</a>
+                    <a class="nav-link active h1" href="{{ route('homework.categories_show')}}">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link h1" href="{{ route('homework.product_create') }}">Товары</a>
+                    <a class="nav-link h1" href="{{ route('homework.products_show')}}">Товары</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link h1" href="{{ route('homework.service_create') }}">Заказы</a>
+                    <a class="nav-link h1" href="{{ route('homework.index')}}">Заказы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link h1" href="{{ route('homework.index')}}">Пользователи</a>
                 </li>
             </ul>
         </div>
+        {{--<div class="container">--}}
+            {{--<ul class="nav col justify-content-between">--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link active h1" href="{{ route('homework.customer_create') }}">Пользователи</a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link h1" href="{{ route('homework.product_create') }}">Товары</a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link h1" href="{{ route('homework.service_create') }}">Заказы</a>--}}
+                {{--</li>--}}
+            {{--</ul>--}}
+        {{--</div>--}}
 
-        @yield('customer')
-        @yield('product')
-        @yield('service')
+        {{--@yield('customer')--}}
+        {{--@yield('product')--}}
+        {{--@yield('service')--}}
+
+        @yield('category_list')
+        @yield('product_list')
+        @yield('product_one')
+
 
     </body>
 </html>
