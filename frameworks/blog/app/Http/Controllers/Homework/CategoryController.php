@@ -20,7 +20,6 @@ class CategoryController extends Controller
     {
         $category = Category::all();
 
-//        dd($category);
         return view('site.categories_list', array('category'=>$category));
     }
 

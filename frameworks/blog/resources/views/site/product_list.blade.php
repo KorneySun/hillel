@@ -10,7 +10,7 @@
         <div class="btn-primary text-center" >
             <h2>Товары</h2>
         </div>
-    <table class="cart-table" cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0" border="0">
         <tbody>
 
                 <tr class="btn-dark">
@@ -24,28 +24,30 @@
 
             @if ($products)
                 @foreach($products as $k=>$product)
-                    @if ($k == 0 || $k%2 == 0)
-                        <tr class="btn-info">
-                    @else
-                        <tr class="btn-secondary">
-                    @endif
 
-                        <td><a style="color:white" href="{{ route('homework.product_show', ['id' => $product['id']]) }}">{{$product['name']}}</a></td>
-                        <td><a style="color:white" href="{{ route('homework.product_show', ['id' => $product['id']]) }}">{{$product['description']}}</a></td>
-                        <td><a style="color:white" href="{{ route('homework.product_show', ['id' => $product['id']]) }}">{{$product['package']}}</a></td>
-                        <td><a style="color:white" href="{{ route('homework.product_show', ['id' => $product['id']]) }}">{{$product['category_id']}}</a></td>
-                        <td><a style="color:white" href="{{ route('homework.product_show', ['id' => $product['id']]) }}">{{$product['price']}}</a></td>
+                        @if ($k == 0 || $k%2 == 0)
+                            <tr class="btn-info">
+                        @else
+                            <tr class="btn-secondary">
+                        @endif
 
+                            <td><a style="color:white" href="{{ route('homework.product_show', ['id' => $product->id]) }}">{{$product->name}}</a></td>
+                            <td style="color:white">{{$product->description}}</td>
+                            <td style="color:white">{{$product->package}}</td>
+                            <td style="color:white">{{$product->category_id}}</td>
+                            <td style="color:white">{{$product->price}}</td>
+                            </tr>
 
-                    </tr>
+                    @endforeach
 
-
-
-                @endforeach
 
             @endif
 
         </tbody>
     </table>
+        <hr/>
+        <div style="margin-left:40%">
+            {{ $products->links() }}
+        </div>
     </div>
 @endsection

@@ -55,10 +55,25 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function products_show()
+    public function products_show($category_id)
     {
-        $products = Product::all();
-        return view('site.product_list', array('products'=>$products));
+
+
+
+       if ($category_id == 1||$category_id == 2) {
+
+           $query = Product::where('category_id', '=', $category_id);
+           $products = $query->orderBy('category_id')->paginate(20);
+        }
+        else{
+            $query = Product::where('id', '<>', 0);
+        }
+        $products = $query->orderBy('category_id')->paginate(20);
+
+
+//       dd($products);
+
+        return view('site.product_list', compact('products'));
     }
 
     /**
@@ -69,10 +84,9 @@ class ProductController extends Controller
      */
     public function product_show($id)
     {
-        $product = Product::where('id', $id)->first();
-//        $product = $product ->toArray();
-//        dd($product);
-        return view('site.product_one', array('product'=>$product));
+        $product = Product::with(['product_images'])
+                   ->where('id', $id)->first();
+        return view('site.product_one', compact('product'));
     }
 
     /**

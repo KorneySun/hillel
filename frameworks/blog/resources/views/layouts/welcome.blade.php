@@ -20,16 +20,17 @@
                     <a class="nav-link active h1" href="{{ route('homework.categories_show')}}">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link h1" href="{{ route('homework.products_show')}}">Товары</a>
+                    <a class="nav-link h1" href="{{ route('homework.products_show', ['category_id' => 0])}}">Товары</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link h1" href="{{ route('homework.index')}}">Заказы</a>
+                    <a class="nav-link h1" href="{{ route('homework.orders_show')}}">Заказы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link h1" href="{{ route('homework.index')}}">Пользователи</a>
+                    <a class="nav-link h1" href="{{ route('homework.users_show')}}">Пользователи</a>
                 </li>
             </ul>
         </div>
+
         {{--<div class="container">--}}
             {{--<ul class="nav col justify-content-between">--}}
                 {{--<li class="nav-item">--}}
@@ -51,7 +52,10 @@
         @yield('category_list')
         @yield('product_list')
         @yield('product_one')
-
+        @yield('user_list')
+        @yield('user_one')
+        @yield('order_list')
+        @yield('order_one')
 
     </body>
 </html>

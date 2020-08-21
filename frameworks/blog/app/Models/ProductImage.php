@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product_image extends Model
+class ProductImage extends Model
 {
-    protected $table = 'Product_image';
+    protected $table = 'product_images';
 
     public function products(){
         return $this->HasOne('App\Models\Product');

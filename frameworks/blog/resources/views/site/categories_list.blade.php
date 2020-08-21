@@ -28,7 +28,7 @@
                 @endif
 
                 <td style="color:white" >{{$item['id']}}</td>
-                <td style="color:white" >{{$item['name']}}</td>
+                <td><a style="color:white" href="{{ route('homework.products_show', ['category_id' => $item->id]) }}">{{$item['name']}}</a></td>
 
                 </tr>
 

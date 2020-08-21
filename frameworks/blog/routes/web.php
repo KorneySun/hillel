@@ -30,10 +30,16 @@ Route::group([
         $route->get('/customer','CustomerController@create')->name('customer_create');
         $route->post('/customer','CustomerController@store')->name('customer_store');
 
-        $route->get('/products_show','ProductController@products_show')->name('products_show');
-        $route->get('/product_show/{id}','ProductController@product_show')->name('product_show');
         $route->get('/categories_show','CategoryController@categories_show')->name('categories_show');
 
+        $route->get('/products_show/{category_id}','ProductController@products_show')->name('products_show');
+        $route->get('/product_show/{id}','ProductController@product_show')->name('product_show');
+
+        $route->get('/users_show','UserController@users_show')->name('users_show');
+        $route->get('/user_show/{id}','UserController@user_show')->name('user_show');
+
+        $route->get('/orders_show','OrderController@orders_show')->name('orders_show');
+        $route->get('/order_show/{id}','OrderController@order_show')->name('order_show');
 
         $route->get('/product','ProductController@create')->name('product_create');
         $route->post('/product','ProductController@store')->name('product_store');

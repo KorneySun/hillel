@@ -26,6 +26,11 @@ class Product extends Model
     public function categories(){
         return $this->HasOne('App\Models\Category');
     }
+
+    public function product_images(){
+        return $this->hasMany('App\Models\ProductImage');
+    }
+
     public function resolveRouteBinding($value, $field = null)
     {
         return $this
