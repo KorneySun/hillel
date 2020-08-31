@@ -11,6 +11,7 @@ $factory->define(ProductImage::class, function (Faker $faker) {
     $temp_image = $faker->image($dir = "public/img", $width = 100, $height = 60, $category = null, $fullPath = true, $randomize = true, $word = null);
     $image = str_replace('\\', '/', $temp_image);
 
+
     return [
         'image' => $image,
         'product_id' => function() {

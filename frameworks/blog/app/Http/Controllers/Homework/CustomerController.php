@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Homework;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CustomerCreateRequest;
+use App\Http\Requests\UserCreateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,7 +25,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerCreateRequest $request)
+    public function store(UserCreateRequest $request)
     {
         /// пример валидации в контроллере
 //        $data = $request->validate([

@@ -7,24 +7,16 @@ namespace App\Http\Requests;
 use App\Http\Rules\UpperCaseFirstLetterRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerCreateRequest extends HomeworkCreateRequest
+class UserCreateRequest extends HomeworkCreateRequest
 {
    public function rules()
     {
         return [
-            'customer_name' => [
+            'name' => [
                 'bail',
                 'required',
                 'min:2',
-                'max:10',
-                new UpperCaseFirstLetterRule,
-
-            ],
-            'surname' => [
-                'bail',
-                'required',
-                'min:3',
-                'max:15',
+                'max:50',
                 new UpperCaseFirstLetterRule,
 
             ],
@@ -32,12 +24,11 @@ class CustomerCreateRequest extends HomeworkCreateRequest
                 'required',
                 'email',
             ],
-            'phone' => [
+            'password' => [
                 'required',
-                'numeric',
-                'digits_between:10,13'
-
-            ]
+                'min:6',
+                'confirmed'
+            ],
         ];
     }
 }

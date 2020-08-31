@@ -18,9 +18,11 @@ class CategoryController extends Controller
      */
     public function categories_show(Category $category)
     {
-        $category = Category::all();
+        $query = Category::query();
 
-        return view('site.categories_list', array('category'=>$category));
+        $category = $query->orderBy('id')->paginate(20);
+
+        return view('site.categories_list', compact('category'));
     }
 
 }

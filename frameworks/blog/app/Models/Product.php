@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductImage;
 /**
  * @property int $id
  * @property string $name
@@ -17,14 +18,17 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'products';
+    protected $fillable = [
+        'name', 'description',  'package', 'category_id', 'price'
+    ];
 
 
-    public function order_products(){
-        return $this->hasMany('App\Models\Order_product');
+    public function orders(){
+        return $this->hasMany('App\Models\Order');
     }
 
-    public function categories(){
-        return $this->HasOne('App\Models\Category');
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
     }
 
     public function product_images(){

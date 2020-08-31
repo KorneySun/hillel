@@ -5,7 +5,7 @@
 ?>
 @extends('layouts.welcome')
 
-@section('order_list')
+@section('content')
     <div class="container-lg" >
         <div class="btn-primary text-center" >
             <h2>Заказы</h2>
@@ -24,29 +24,22 @@
 
             @if ($orders)
                 @foreach($orders as $k=>$order)
-                    {{--{{dd($order)}}--}}
-
                     @if ($k == 0 || $k%2 == 0)
                         <tr class="btn-info">
                     @else
                         <tr class="btn-secondary">
                     @endif
 
-                            <td><a style="color:white" href="{{ route('homework.order_show', ['id' => $order->id]) }}">
+                            <td><a style="color:white" href="{{ route('homework.order_show', $order) }}">
                                     &nbsp;&nbsp;&nbsp;{{$order->order_number}}&nbsp;&nbsp;&nbsp;
                                 </a>
                             </td>
                             <td style="color:white">{{$order->order_date}}</td>
-                            <td style="color:white">{{$order->users->name}}</td>
+                            <td style="color:white">{{$order->user->name}}</td>
                             <td style="color:white">{{$order->order_sum}}</td>
-
-
                         </tr>
-
                         @endforeach
-
                     @endif
-
             </tbody>
         </table>
             <hr/>

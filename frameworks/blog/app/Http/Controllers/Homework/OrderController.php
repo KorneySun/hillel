@@ -19,14 +19,11 @@ class OrderController extends Controller
      */
     public function orders_show()
     {
-        $query = Order::with(['users'])
-        ->where('order_number', '<>', '0');
+        $query = Order::with(['user']);
 
         $orders = $query->orderBy('order_date')->paginate(20);
-//        dd($orders);
 
         return view('site.order_list', compact('orders'));
-
     }
 
     /**
@@ -37,8 +34,8 @@ class OrderController extends Controller
      */
     public function order_show($id)
     {
-        $order = Order::with(['users'])->where('id', $id)->first();
-        return view('site.order_one', array('order'=>$order));
+        $order = Order::with(['user'])->where('id', $id)->first();
+        return view('site.order_one', compact('order'));
     }
 
     /**

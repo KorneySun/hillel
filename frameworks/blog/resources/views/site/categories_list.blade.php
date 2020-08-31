@@ -5,7 +5,8 @@
 ?>
 @extends('layouts.welcome')
 
-@section('category_list')
+{{--@section('category_list')--}}
+@section('content')
 <div class="container-lg" >
     <div class="btn-primary text-center" >
         <h2>Категории</h2>
@@ -28,7 +29,7 @@
                 @endif
 
                 <td style="color:white" >{{$item['id']}}</td>
-                <td><a style="color:white" href="{{ route('homework.products_show', ['category_id' => $item->id]) }}">{{$item['name']}}</a></td>
+                <td><a style="color:white" href="{{ route('homework.products_show', [$item->id]) }}">{{$item['name']}}</a></td>
 
                 </tr>
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Homework;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCreateRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
+use App\Models\ProductImage;
 
 class ProductController extends Controller
 {
@@ -17,7 +19,7 @@ class ProductController extends Controller
      */
     public function create(){
 
-        return view('site.product');
+        return view('site.product_create');
     }
 
     /**
@@ -26,27 +28,25 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCreateRequest $request)
-    {
-        /// пример валидации в контроллере
-//        $data = $request->validate([
-//            'title' => 'required|min:3|max:10',
-//            'email' => [
-//                'required',
-//                'email',
-//            ],
-//        ])->;
 
-//        $request->get('title'); // получения поля с запроса через геттер - самый правильный
-//        $request->title; // получения поля с запроса в ооп стиле
-//        $request['title']; // получения поля с запроса как с ассоциативного массива
+    public function store(ProductCreateRequest $request)  {
 
-        $request->all(); // все поля в запросе
-//        $request->only('title', 'email'); // только определенные поля
+        $data = $request->only('name',
+            'description',
+            'package',
+            'category_id',
+            'price',
+            'image');
+
+        $product = Product::create($data);
+
+        $product->product_images()->create(['image' => 'public/img/'.$data['image']]);
+
 
         return redirect(
-            route('homework.index')
-        );
+            route('homework.products_show')
+        )->with('success', 'Новый товар успешно создан.');
+
     }
 
     /**
@@ -55,23 +55,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function products_show($category_id)
+    public function products_show(Category $category = null)
     {
-
-
-
-       if ($category_id == 1||$category_id == 2) {
-
-           $query = Product::where('category_id', '=', $category_id);
-           $products = $query->orderBy('category_id')->paginate(20);
+       if ($category) {
+           $query = Product::whereHas('category', function ($query) use ($category) {
+             $query->where('id', $category->id);
+           });
         }
         else{
-            $query = Product::where('id', '<>', 0);
+            $query = Product::query();
         }
         $products = $query->orderBy('category_id')->paginate(20);
-
-
-//       dd($products);
 
         return view('site.product_list', compact('products'));
     }
@@ -82,10 +76,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function product_show($id)
+    public function product_show(Product $product)
     {
-        $product = Product::with(['product_images'])
-                   ->where('id', $id)->first();
         return view('site.product_one', compact('product'));
     }
 
@@ -95,9 +87,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        dd($id);
+        return view('site.product_edit', compact('product'));
     }
 
     /**
@@ -107,9 +99,29 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BlogCreateRequest $request, $id)
+    public function product_update(ProductCreateRequest $request, Product $product)
     {
-        //
+        $id = $product->id;
+        $data = $request->only('name',
+                                     'description',
+                                     'package',
+                                     'category_id',
+                                     'price',
+                                     'image');
+
+        $product->update($data);
+
+
+        $product->product_images()->update(['image' => 'public/img/'.$data['image']]);
+
+        /**
+         * Не решил как правильно - обновлять фотку старую или добавлять новую
+         */
+//       $product->product_images()->create(['image' => 'public/img/'.$data['image']]);
+
+        return redirect(
+            route('homework.products_show')
+            )->with('info', 'Данный товар успешно обновлен.');
     }
 
     /**
@@ -118,8 +130,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+//    public function destroy(Product $product)
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->get('delete_id');
+        $deleted = Product::find($id)->delete();
+        if ($deleted){
+            return true;
+        }
     }
 }
