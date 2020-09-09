@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\ProductImage;
 /**
  * @property int $id
@@ -31,7 +32,7 @@ class Product extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function product_images(){
+    public function product_images():HasMany {
         return $this->hasMany('App\Models\ProductImage');
     }
 

@@ -20,6 +20,7 @@ class Category extends Model
      * @var string
      */
     protected $table = 'categories';
+    protected $fillable = ['name'];
 
     /**
      * @return HasMany

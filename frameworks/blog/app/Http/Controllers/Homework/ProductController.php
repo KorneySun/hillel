@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\ProductImage;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -38,9 +39,12 @@ class ProductController extends Controller
             'price',
             'image');
 
-        $product = Product::create($data);
+        DB::transaction(function () use ($data) {
 
-        $product->product_images()->create(['image' => 'public/img/'.$data['image']]);
+            $product = Product::create($data);
+            $product->product_images()->create(['image' => 'public/img/' . $data['image']]);
+
+        });
 
 
         return redirect(

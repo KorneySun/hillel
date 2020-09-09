@@ -9,9 +9,9 @@ class ProductImage extends Model
 {
     protected $table = 'product_images';
 
-    protected $fillable = ['image' ];
+    protected $fillable = ['image', 'product_id'];
 
     public function product(){
-        return $this->belongsTo('App\Models\Product', 'product_id', 'id');
+        return $this->belongsTo('App\Models\Product');
     }
 }
