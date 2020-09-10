@@ -5,7 +5,7 @@ services:
       build:
           context: ./docker/nginx
       volumes:
-          - /blog:/app
+          - ./:/app
       ports:
           - "8080:80"
       depends_on:
@@ -17,7 +17,7 @@ services:
       build:
           context: ./docker/php
       volumes:
-          - /blog:/app
+          - ./:/app
       environment:
       - "DB_CONNECTION=${DB_CONNECTION}"
       - "DB_HOST=${DB_HOST}"
