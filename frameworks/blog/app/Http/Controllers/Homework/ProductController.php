@@ -113,10 +113,13 @@ class ProductController extends Controller
                                      'price',
                                      'image');
 
-        $product->update($data);
 
+        DB::transaction(function () use ($data, $product) {
 
-        $product->product_images()->update(['image' => 'public/img/'.$data['image']]);
+            $product->update($data);
+            $product->product_images()->update(['image' => 'public/img/' . $data['image']]);
+
+        });
 
         /**
          * Не решил как правильно - обновлять фотку старую или добавлять новую
